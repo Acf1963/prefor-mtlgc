@@ -10,7 +10,7 @@ import { motion, AnimatePresence } from 'motion/react';
 export default function App() {
   const businessInfo = {
     name: "Prefor Metalúrgica",
-    location: "Zango 1, Luanda, Angola",
+    location: "Parque Industrial do Zango, Rua da Boa Esperança N3, Viana",
     whatsapp: "+244947892185",
     displayWhatsapp: "+244 947 892 185",
     services: [
@@ -300,6 +300,38 @@ export default function App() {
                   <Phone className="w-5 h-5 text-orange-600" />
                   <span className="font-bold text-sm md:text-base">{businessInfo.displayWhatsapp}</span>
                 </div>
+              </div>
+            </div>
+
+            {/* Google Maps Card */}
+            <div className="mt-12 w-full h-64 md:h-96 rounded-3xl overflow-hidden shadow-2xl border-4 border-white relative group">
+              <iframe
+                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d15768.123456789!2d13.4123456!3d-8.9123456!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x1a51f123456789ab%3A0x1234567890abcdef!2sViana%2C%20Angola!5e0!3m2!1spt-PT!2sao!4v1710940000000!5m2!1spt-PT!2sao"
+                width="100%"
+                height="100%"
+                style={{ border: 0 }}
+                allowFullScreen
+                loading="lazy"
+                referrerPolicy="no-referrer-when-downgrade"
+                title="Localização Prefor Metalúrgica"
+                className="grayscale hover:grayscale-0 transition-all duration-700"
+              ></iframe>
+              <div className="absolute bottom-4 left-4 right-4 bg-slate-900/90 backdrop-blur-md p-4 rounded-2xl border border-white/10 flex items-center justify-between opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                <div className="flex items-center gap-3">
+                  <div className="w-10 h-10 bg-orange-600 rounded-xl flex items-center justify-center">
+                    <MapPin className="w-5 h-5 text-white" />
+                  </div>
+                  <div className="text-left">
+                    <p className="text-[10px] uppercase font-bold text-orange-500 tracking-widest">Nossa Morada</p>
+                    <p className="text-white text-xs font-bold">{businessInfo.location}</p>
+                  </div>
+                </div>
+                <button 
+                  onClick={() => window.open(`https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(businessInfo.location)}`, '_blank')}
+                  className="bg-white text-slate-900 px-4 py-2 rounded-lg text-[10px] font-black uppercase tracking-widest hover:bg-orange-600 hover:text-white transition-colors"
+                >
+                  Abrir no Maps
+                </button>
               </div>
             </div>
           </div>

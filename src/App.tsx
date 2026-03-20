@@ -60,7 +60,7 @@ export default function App() {
   const toggleMenu = () => setIsMenuOpen(!isMenuOpen);
 
   return (
-    <div className="min-h-screen font-sans text-slate-900 selection:bg-orange-100 bg-slate-100 overflow-x-hidden">
+    <div className="min-h-screen font-sans text-slate-900 selection:bg-orange-100 bg-slate-100 overflow-x-hidden scroll-smooth">
       {/* Navigation Bar */}
       <nav className="fixed top-0 left-0 right-0 z-50 bg-slate-900/90 backdrop-blur-md border-b border-white/10">
         <div className="container mx-auto px-4 sm:px-6 h-20 flex items-center justify-between">
@@ -92,8 +92,8 @@ export default function App() {
 
           {/* Mobile Menu Toggle */}
           <button 
-            onClick={toggleMenu}
-            className="md:hidden text-white p-2 hover:bg-white/10 rounded-lg transition-colors z-50"
+            onClick={() => setIsMenuOpen(!isMenuOpen)}
+            className="md:hidden text-white p-2 hover:bg-white/10 rounded-lg transition-colors relative z-50"
             aria-label="Toggle Menu"
           >
             {isMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
@@ -104,19 +104,19 @@ export default function App() {
         <AnimatePresence>
           {isMenuOpen && (
             <motion.div 
-              initial={{ opacity: 0, height: 0 }}
-              animate={{ opacity: 1, height: 'auto' }}
-              exit={{ opacity: 0, height: 0 }}
-              transition={{ duration: 0.3, ease: "easeInOut" }}
-              className="md:hidden bg-slate-900 border-b border-white/10 overflow-hidden"
+              initial={{ opacity: 0, y: -10 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -10 }}
+              transition={{ duration: 0.2 }}
+              className="fixed top-20 left-0 right-0 md:hidden bg-slate-900 border-b border-white/10 shadow-2xl z-40"
             >
               <div className="px-6 py-8 flex flex-col gap-6">
-                <a href="#" onClick={(e) => { e.preventDefault(); scrollToTop(); toggleMenu(); }} className="text-sm font-bold text-slate-300 hover:text-orange-500 transition-colors uppercase tracking-widest">Início</a>
-                <a href="#servicos" onClick={toggleMenu} className="text-sm font-bold text-slate-300 hover:text-orange-500 transition-colors uppercase tracking-widest">Serviços</a>
-                <a href="#porque-escolher" onClick={toggleMenu} className="text-sm font-bold text-slate-300 hover:text-orange-500 transition-colors uppercase tracking-widest">Diferenciais</a>
-                <a href="#orcamento" onClick={toggleMenu} className="text-sm font-bold text-slate-300 hover:text-orange-500 transition-colors uppercase tracking-widest">Orçamento</a>
+                <a href="#" onClick={(e) => { e.preventDefault(); scrollToTop(); setIsMenuOpen(false); }} className="text-sm font-bold text-slate-300 hover:text-orange-500 transition-colors uppercase tracking-widest">Início</a>
+                <a href="#servicos" onClick={() => setIsMenuOpen(false)} className="text-sm font-bold text-slate-300 hover:text-orange-500 transition-colors uppercase tracking-widest">Serviços</a>
+                <a href="#porque-escolher" onClick={() => setIsMenuOpen(false)} className="text-sm font-bold text-slate-300 hover:text-orange-500 transition-colors uppercase tracking-widest">Diferenciais</a>
+                <a href="#orcamento" onClick={() => setIsMenuOpen(false)} className="text-sm font-bold text-slate-300 hover:text-orange-500 transition-colors uppercase tracking-widest">Orçamento</a>
                 <button 
-                  onClick={() => { handleWhatsAppClick(); toggleMenu(); }}
+                  onClick={() => { handleWhatsAppClick(); setIsMenuOpen(false); }}
                   className="bg-orange-600 hover:bg-orange-700 text-white px-6 py-4 rounded-xl font-bold text-sm tracking-widest w-full transition-all active:scale-95"
                 >
                   CONTACTAR AGORA
@@ -174,7 +174,7 @@ export default function App() {
       {/* Stainless Steel Texture Section */}
       <main className="relative z-10">
         {/* Services */}
-        <section id="servicos" className="py-16 md:py-24 container mx-auto px-4 sm:px-6">
+        <section id="servicos" className="py-16 md:py-24 container mx-auto px-4 sm:px-6 scroll-mt-24">
           <div className="text-center mb-12 md:text-center">
             <h2 className="text-3xl md:text-4xl font-black text-slate-900 mb-4 uppercase tracking-tight">Nossos Serviços</h2>
             <div className="h-1.5 w-20 md:w-24 bg-orange-600 mx-auto rounded-full"></div>
@@ -228,7 +228,7 @@ export default function App() {
         </section>
 
         {/* Why Choose Us */}
-        <section id="porque-escolher" className="py-16 md:py-24 bg-slate-900 text-white overflow-hidden relative">
+        <section id="porque-escolher" className="py-16 md:py-24 bg-slate-900 text-white overflow-hidden relative scroll-mt-24">
           <div className="absolute top-0 right-0 w-64 h-64 bg-orange-600/10 blur-[100px]"></div>
           <div className="container mx-auto px-4 sm:px-6 relative z-10">
             <div className="flex flex-col lg:flex-row items-center gap-12 md:gap-16">
@@ -273,7 +273,7 @@ export default function App() {
         </section>
 
         {/* CTA Section */}
-        <section id="orcamento" className="py-16 md:py-24 container mx-auto px-4 sm:px-6">
+        <section id="orcamento" className="py-16 md:py-24 container mx-auto px-4 sm:px-6 scroll-mt-24">
           <div className="bg-linear-to-br from-slate-100 to-slate-300 rounded-4xl md:rounded-5xl p-8 md:p-20 text-center border border-white shadow-2xl relative overflow-hidden">
             <div className="absolute -top-24 -left-24 w-64 h-64 bg-orange-500/5 rounded-full blur-3xl"></div>
             <h2 className="text-3xl md:text-5xl font-black text-slate-900 mb-6 md:mb-8 uppercase tracking-tighter">Solicite o seu orçamento hoje!</h2>
